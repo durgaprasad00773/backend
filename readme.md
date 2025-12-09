@@ -1,3 +1,1 @@
-Im following a youtube series to learn Backend development
-
-this is the project im doing
+This is a backend project to a YouTube like platform , where videos can be uploaded
