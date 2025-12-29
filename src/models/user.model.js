@@ -89,9 +89,6 @@ userSchema.methods.generateRefreshToken = function (){
     //payload
     return jwt.sign({
         _id : this._id,
-        email : this.email,
-        name : this.name,
-        fullName : this.fullName
         },
 
 
