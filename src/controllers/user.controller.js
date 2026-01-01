@@ -93,11 +93,9 @@ const loginuser = asyncHandler(async(req, res) => {
 
   const {email, username, password} = req.body;
 
-  //checking all data is present
-
-  if(!password || !email ||!username)
-  {
-    throw new ApiError(400, "All fields are required");
+  // Require password and either email or username
+  if (!password || (!email && !username)) {
+    throw new ApiError(400, "Password and either email or username are required");
   }
 
   //find the user
@@ -116,7 +114,7 @@ const loginuser = asyncHandler(async(req, res) => {
 
   if(!isPasswordValid)
   {
-    throw new ApiError(404, "Invalid Password");
+    throw new ApiError(401, "Invalid Password");
   }
 
   //accesstoken and refreshtoken
@@ -129,7 +127,7 @@ const loginuser = asyncHandler(async(req, res) => {
 
   const cookieOptions = {
     httpOnly: true,
-    secure: true,
+    secure: process.env.NODE_ENV === "production",
     sameSite: "strict"
   }
 
